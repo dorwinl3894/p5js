@@ -12,6 +12,7 @@
 
         function draw() {
             
+            
             rect(0,600,1000,1000) //floor
             stroke(10) //outline
             strokeWeight(10); //
@@ -23,6 +24,7 @@
             fill(221,109,22) //color
             rect(100,200,500,300) //body
             ellipse(650,180,200,200) //head
+            
             strokeWeight(5); //outline
             ellipse(700,150,20,20) //eye
             ellipse(600,150,20,20) //eye
@@ -30,13 +32,33 @@
             line(620,130,600,120) //eyebrow
             line(650,180,640,170) //eyebrow
             line(680,130,700,120) //nose
+            
             triangle(600,250,620,250,610,275) //Extra Credit
             triangle(620,250,640,250,630,275) //teeth 
             triangle(640,250,660,250,650,275) //teeth
             triangle(660,250,680,250,670,275) //teeth
             triangle(680,250,700,250,690,275) //teeth
+            
             textSize(80) //text size
             text("Lion",180,350) //"Lion"
+            
+            //Quote
+            fill("Orange")
+            beginShape(line);
+            vertex(280,20,);
+            vertex(250,70,);
+            vertex(280,140,);
+            vertex(470,140,);
+            vertex(500,140,);
+            vertex(600,20,);
+            vertex(580,10);
+            vertex(280,20,);
+            endShape();
+            
+            text("rawr!!!!!",300,75)
+            line(520,120,550,130)
+            line(550,130,535,100)
+            
         }
     </script>
 </head>
