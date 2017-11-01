@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+    
+    <script>
+    
+   
+
+    var star = "Yellow"
+    var colorrandom
+    var scale
+    
+        function setup() {
+            createCanvas(800,600);
+            scale = 1;
+        }
+
+        
+        function keyPressed() {
+            var size = 50
+            var scale = scale + 0.05
+            clear()
+            background(mouseX,30,30)
+            
+             
+            fill("Red")       //lines 42-45 prints a text
+            textStyle(ITALIC)    
+            textSize(100)
+            text("ELMO!!",220,100)
+            
+            fill("Red")
+            ellipse(mouseX,mouseY,size+150,size+150)       //lines 47-62 draws Elmo's face
+            
+             fill("White")
+            ellipse(mouseX-30,mouseY-40,size+20,size+20)
+            ellipse(mouseX+30,mouseY-40,size+20,size+20)
+            
+            fill("Black")
+            ellipse(mouseX,mouseY+40,size+60,size+40)
+            
+            fill("Orange")
+            ellipse(mouseX,mouseY+10,size,size+10)
+            
+            fill("Black")
+            ellipse(mouseX-30,mouseY-40,size-20,size-20)
+            ellipse(mouseX+30,mouseY-40,size-20,size-20)
+            
+            
+            
+        }
+        
+         function mouseDragged() {
+             var colorrandom = random(200)
+             var scale = 1.5
+             
+             background(0,0,mouseY)  //line 69-70 clears background and changes background
+            
+            
+            fill("Purple")
+            textStyle(ITALIC)
+            textSize(100)             //lines 61-64 prints out a text
+            text("STARS!!",220,100)
+            
+             fill(star)               //lines 66-88 prints out the yellow from the stars. 
+             noStroke()
+             triangle(mouseX-40,mouseY+70,mouseX,mouseY-70,mouseX+20,mouseY)
+             triangle(mouseX+40,mouseY+70,mouseX-50,mouseY-20,mouseX+20,mouseY)
+             triangle(mouseX-50,mouseY-20,mouseX+50,mouseY-20,mouseX,mouseY+20)
+             
+             fill(0,0,colorrandom)
+             noStroke()
+             triangle(mouseY-40,mouseX+70,mouseY,mouseX-70,mouseY+20,mouseX)
+             triangle(mouseY+40,mouseX+70,mouseY-50,mouseX-20,mouseY+20,mouseX)
+             triangle(mouseY-50,mouseX-20,mouseY+50,mouseX-20,mouseY,mouseX+20)
+             
+             fill(colorrandom,0,colorrandom)
+             noStroke()
+             triangle(mouseX/2-40,mouseY/2+70,mouseX/2,mouseY/2-70,mouseX/2+20,mouseY/2)
+             triangle(mouseX/2+40,mouseY/2+70,mouseX/2-50,mouseY/2-20,mouseX/2+20,mouseY/2)
+             triangle(mouseX/2-50,mouseY/2-20,mouseX/2+50,mouseY/2-20,mouseX/2,mouseY/2+20)
+             
+             fill(colorrandom,colorrandom,0)
+             noStroke()
+             triangle(mouseX*2-40,mouseY*2+70,mouseX*2,mouseY*2-70,mouseX*2+20,mouseY*2)
+             triangle(mouseX*2+40,mouseY*2+70,mouseX*2-50,mouseY*2-20,mouseX*2+20,mouseY*2)
+             triangle(mouseX*2-50,mouseY*2-20,mouseX*2+50,mouseY*2-20,mouseX*2,mouseY*2+20)
+             
+             
+             
+            strokeWeight(3) //sets stroke weight for outline of stars
+            stroke(1)
+                                        //lines 95-164 creates the outline of the stars
+            beginShape(LINES)           //star #1 
+            vertex(mouseX-40,mouseY+70)    
+            vertex(mouseX,mouseY-70)
+            
+            vertex(mouseX,mouseY-70)
+            vertex(mouseX+40,mouseY+70)
+            
+            vertex(mouseX+40,mouseY+70)
+            vertex(mouseX-50,mouseY-20)
+            
+            vertex(mouseX-50,mouseY-20)
+            vertex(mouseX+50,mouseY-20)
+            
+            vertex(mouseX+50,mouseY-20)
+            vertex(mouseX-40,mouseY+70)
+            endShape()
+            
+            beginShape(LINES)               //star #2
+            vertex(mouseY-40,mouseX+70)
+            vertex(mouseY,mouseX-70)
+            
+            vertex(mouseY,mouseX-70)
+            vertex(mouseY+40,mouseX+70)
+            
+            vertex(mouseY+40,mouseX+70)
+            vertex(mouseY-50,mouseX-20)
+            
+            vertex(mouseY-50,mouseX-20)
+            vertex(mouseY+50,mouseX-20)
+            
+            vertex(mouseY+50,mouseX-20)
+            vertex(mouseY-40,mouseX+70)
+            endShape()
+            
+            
+             
+            beginShape(LINES)                //star #3
+            vertex(mouseX*2-40,mouseY*2+70)
+            vertex(mouseX*2,mouseY*2-70)
+            
+            vertex(mouseX*2,mouseY*2-70)
+            vertex(mouseX*2+40,mouseY*2+70)
+            
+            vertex(mouseX*2+40,mouseY*2+70)
+            vertex(mouseX*2-50,mouseY*2-20)
+            
+            vertex(mouseX*2-50,mouseY*2-20)
+            vertex(mouseX*2+50,mouseY*2-20)
+            
+            vertex(mouseX*2+50,mouseY*2-20)
+            vertex(mouseX*2-40,mouseY*2+70)
+            endShape()
+            
+             
+            beginShape(LINES)                 //star #4
+            vertex(mouseX/2-40,mouseY/2+70)
+            vertex(mouseX/2,mouseY/2-70)
+            
+            vertex(mouseX/2,mouseY/2-70)
+            vertex(mouseX/2+40,mouseY/2+70)
+            
+            vertex(mouseX/2+40,mouseY/2+70)
+            vertex(mouseX/2-50,mouseY/2-20)
+            
+            vertex(mouseX/2-50,mouseY/2-20)
+            vertex(mouseX/2+50,mouseY/2-20)
+            
+            vertex(mouseX/2+50,mouseY/2-20)
+            vertex(mouseX/2-40,mouseY/2+70)
+            endShape()
+            
+            
+            
+        }
+        
+        
+    </script>
+</head>
+
+<body>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/dorwinl3894/p5js/blob/gh-pages/interaction-project.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+</html>
