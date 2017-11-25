@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+
+    <script>
+        
+        
+        var color
+        var size
+        function setup() {
+            createCanvas(600, 600);
+            background(90, 180, 230)
+            color = 255
+            size = 35
+        }
+
+        function draw() {
+            fill("orange")          //rectangles that change the pictures color
+            rect(200,500,100,100)
+            fill("purple")
+            rect(400,500,100,100)
+            fill("Green")
+            rect(0,500,100,100)
+            fill("Blue")
+            rect(100,500,100,100)
+            fill("magenta")
+            rect(300,500,100,100)
+            fill("red")
+            rect(500,500,100,100)
+            
+            fill("Red")             //rectangles that change the pictures size
+            rect(500,0,100,100) 
+            line(500,50,600,50)
+            fill("Black")
+            textSize(36)
+            text("+",540,40)
+            text("-",545,80)
+
+            if (mouseIsPressed) {           //creates the picture
+                fill(color)
+                ellipse(mouseX, mouseY - 20, size)
+                ellipse(mouseX, mouseY + 20, size)
+                ellipse(mouseX - 20, mouseY, size)
+                ellipse(mouseX + 20, mouseY, size)
+            }
+        }
+
+        function mousePressed() {
+            if (mouseX > 0 && mouseX < 100 && mouseY > 500 && mouseY < 580) {          //color green
+                color = "Green"
+            }
+            else if (mouseX > 100 && mouseX < 200 && mouseY > 500 & mouseY < 600){     //color blue
+                color = "Blue"
+            }
+            else if (mouseX > 200 && mouseX < 300 && mouseY > 500 && mouseY < 580) {    //color orange
+                color = "Orange"
+            }
+            else if (mouseX > 300 && mouseX < 400 && mouseY > 500 & mouseY < 600){    //color magenta
+                color = "magenta"
+            }
+            else if (mouseX > 400 && mouseX < 500 && mouseY > 500 && mouseY < 600){   //color purple
+                color = "Purple"
+            }
+            else if (mouseX > 500 && mouseX < 600 && mouseY > 500 & mouseY < 600){   //color red
+                color = "red"
+            }
+            else if (mouseX > 500 && mouseX < 600 && mouseY > 0 && mouseY < 50) {    // size increase
+                size = size * 2
+            }
+            else if (mouseX > 500 && mouseX < 600 && mouseY > 50 && mouseY < 100) {  //size decrease
+                size = size/2
+            }  
+        }
+        
+    </script>
+</head>
+<body>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/dorwinl3894/p5js/blob/gh-pages/projectcopy.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+</html>
