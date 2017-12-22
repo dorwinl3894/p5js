@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>Pong</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.13/p5.js"></script>
+    <script>
+        var ballX;            //changable value of X for ball
+        var ballY;            //changable value of Y for ball
+        var ballSpeedX = 0;   //changable value of X speed for ball
+        var ballSpeedY = 0;   //changable value of Y speed for ball
+        var paddleHeight = 30; //sets paddle height
+        var paddleWidth = 200  //changable paddle width
+        var time               // creates a timer system
+        var x                  //  x value used for the moving rectangle in the middle
+        var y                  //  y value used for the moving rectangle in the middle
+        var size               // makes ball bigger
+        var opacity            // makes rectangle invisible
+        var opacity1           // makes warning popups invisible and visible
+        
+        function setup() {
+            createCanvas(800,600);  //creates canvas
+            noCursor();             // removes cursor
+            time = 0                 //lines 24-31 gives variables a value
+            ballX = random(width);
+            ballY = random(height/2);
+            x = 0
+            y = 300
+            size = 20
+            opacity = 255
+            opacity1 = 255
+        }
+
+        function draw() {     
+            background(0,205,205);   //cyan background
+            moveBall();              // lines 36-41 activates the custom functions
+            checkCollide(); 
+            drawPaddle();
+            drawBall();
+            timer();
+            obstacle();
+        }
+        
+        function obstacle() {     //custom function named 'obstacle'
+            fill(0,144,255,opacity)  //blue color and visible
+            rect(x,y,80,20)          // creates the shape
+            x++                      // moves the shape to the right
+            if (x === width) { // if rectangle reaches the edge, make the rectangle start from the left and go right
+                opacity = 255     // also make rectangle visible
+                fill(0,144,255,opacity) //makes rectangle into original color and opacity
+                x = 0 //make x start at the left of the screen
+            }
+        }
+        
+        function mousePressed() {  //called when mouse is pressed
+          if (ballSpeedX == 0) {  //if ball is not moving, make it move downwards
+           ballSpeedX = 5
+           ballSpeedY = 5
+           
+          }
+        }
+        
+        function moveBall() {      //custom function to move the ball
+            ballX = ballX + ballSpeedX;   //moves the ball at a certain speed via X value
+            ballY = ballY + ballSpeedY;   //moves the ball at a certain speed via Y value
+
+            console.log("ballSpeedX: " + ballSpeedX +    //types in ballspeedX and Y info in console
+                        ", ballSpeedY: " + ballSpeedY);
+        }
+
+        function checkCollide() {    //custom function to bounce the ball
+            
+            if (ballX < 0 || ballX > width) {    //ball bounces the opposite direction in 
+                ballSpeedX = ballSpeedX * -1;    // the left and right walls
+            }
+            if (ballY < 0) {                    //ball bounces downwards when touching top walll
+                ballSpeedY = ballSpeedY * -1;
+            }
+            if (ballY >  height - paddleHeight) {     //if ball is within paddle height,
+                if (ballX   > mouseX && ballX < mouseX + paddleWidth) { //if touching paddle, bounce up
+                  ballSpeedY = ballSpeedY * -1.05;
+                  ballSpeedX = ballSpeedX * +1.05;
+                }
+                else {                             //else stop the game and print "GAME OVER!""
+                    text("GAME OVER!", width / 2, height / 2);
+                    noLoop();
+                }
+            }
+        }
+
+        function drawBall() {    //custom function to create the ball
+            fill("Green")        //green color
+            noStroke();          //no outline
+            ellipse(ballX, ballY, size, size);   //creates the ball using three variables
+            if (ballX < x + 80 && ballX > x  && ballY > y -20 && ballY < y ) { //if ball touches rectangle
+                x = width-50                     //make rectangle go near the right edge
+                opacity = 0                     // make rectangle invisible
+                size +=10                       //change size of ball for every tick that they touch
+                 
+            }
+            
+        }
+
+        function drawPaddle() {     //custom function for paddle
+            strokeWeight(4);        // make outline more thick
+            rect(mouseX, height - paddleHeight - 4, paddleWidth, paddleHeight);  //creates paddle
+        }
+        
+        function timer() {     //custom function for timer on top left
+            fill(255)          // make text white
+            textSize(64)       // make font size 64
+            if(ballSpeedX != 0) {  // makes time start counting once ball moves
+            time++                 //custom time system that counts every tick of the game
+            text("time = " + time + " ticks",20,50)  //creates text at top left
+            }
+            
+            if (time > 150 && time < 250) {     //if time is between 150-250 ticks...
+                fill(255,255,0,opacity1)        //yellow color for triangle below
+                triangle(width/2,300,width/2-50,400,width/2+50,400) //create triangle
+                fill("Black")  //black color for text below
+                textSize(64)   //font size to 64
+                text("!",width/2-10,380) //print out "!" in the middle of the triangle
+            }
+            if (time > 650 && time < 750) {   //same as line 117-122, but 'danger sign'...
+                fill(255,255,0,opacity1)      //appears between 650-750 ticks
+                triangle(width/2,300,width/2-50,400,width/2+50,400)
+                fill("Black")
+                textSize(64)
+                text("!",width/2-10,380)
+            } 
+            if (time > 250) {    //if time is greater than 250, make ball faster by 
+                moveBall()       //running the moveBall() function again ====> 2x speed
+                }
+            if (time > 500) {     //if time is greater than 500, make width of paddle
+                paddleWidth = 250 // bigger by increasing by 50
+                }
+            if (time > 750) {     // if time is greater than 750, make ball faster again
+                moveBall()        // by running moveBall() for a third time ====> 3x speed
+                }
+            if (time > 1000) {   // if time isg reater than 1000, make width of paddle
+                paddleWidth = 300// bigger by increasing by 100
+                
+                }
+            
+        }
+        
+    </script>
+</head>
+
+<body>
+<form><input TYPE="button" onClick="history.go(0)" value="Reset"></form>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/dorwinl3894/p5js/blob/gh-pages/pong-remix.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+</html>
