@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+    
+    <script>
+    var charMove;  //custom variables 
+    var charUp;
+    var leftWall = 100;  
+    var rightWall = 600;
+    var obstacles = []   //array for the objects
+    var difficulty 
+    var score
+    var count
+ 
+        function setup() {
+            createCanvas(700,700);   //canvas
+            charMove = width/2       //all these define my variables
+            charUp= height-50        //where the ball appears
+            difficulty = 3           //3 circles at the start of the game
+            score = 0                //inital score of 0
+            count = 0                //inital timer of 0
+            time = int(count++/60)   //happens every one second
+        }
+
+        function draw() {
+            background(154,226,251)  //background color
+            details();               //functions that are used every second
+            charModel();
+            moveMechanic();
+            walls()
+            timer()
+            levels() 
+            ghost = map(charMove,70,600,70,600, true) //makes another circle right under the moving circle
+            ellipse(ghost,680,30,30)                  // to indicate where it will appear once it hits the top
+            
+        function levels() {
+            for(var i = 0; i < difficulty; i++) {      //creates the objects that fall down
+                obstacles.push(new Rock())
+                obstacles[i].display()
+                obstacles[i].move()
+                
+            }
+            if (charUp < 20) {                 //if the ball hits the top of the canvas, five
+                charUp = height-20     // new objects will come down
+                difficulty = difficulty + 9
+                score = score + 100           // score + 100
+            }
+        }
+            
+        }
+        function Rock() {      //randomly generates X values for the objects
+            this.x = random(100,600)
+            this.y = 0
+            
+            this.move = function() { //makes the objects go straight down
+                this.y++
+                if ( score > 499) {     //makes objects fall faster when ... score > 500 
+                    this.y++
+                    this.y++
+                    
+                    
+                }
+                
+                if (score > 999) {    //and even faster when score > 1000
+                    this.y++
+                    this.y++
+                }
+                
+                if (score > 1499) {   //and even faster when score > 1500
+                    this.y++
+                    this.y++
+                }
+            }
+            this.display = function() {   //creates the object's appearance
+                fill("yellow")
+                ellipse(this.x,this.y,50,50)
+                textSize(36)
+                fill("Black")
+                text("!",this.x-5,this.y+10)
+                
+                if (dist(this.x,this.y,charMove,charUp) < 35) { //if the distance between the ball and the circle
+                textSize(30)                                    // is less than 35, then game over.
+                fill("Red")
+                text("Game Over! Restart to play again",125,200)
+                pause()
+            }
+            }
+            
+            
+            
+        }
+        function timer() { //creates the text
+            fill("black")           //fill creates the color of the text
+            textSize(25)            // textSize = font
+            text("Score",10,60)     
+            fill("red")
+            text(score,10,100)
+            fill("Black")
+            textSize(18)
+            text("How to play",0,150)
+            textSize(13)
+            fill("Red")
+            text("Use arrow keys",0,170)
+            text("left,right,up,down",0,190)
+            fill("Blue")
+            text("Avoid the circles!",0,210)
+            fill("Red")
+            text("Upon reaching ",0,230)
+            text("the top, ",0,250)
+            text("You will respawn",0,270)
+            text("Where the black",0,290)
+            text("circle is",0,310)
+            fill("Blue")
+            text("Goal is to get",0,330)
+            text("as much points",0,350)
+            text("as you can ",0,370)
+            text("under 60s",0,390)
+            textSize(64)
+            text(int(count++/60) + "s",600,200) //prints out every second
+            textSize(25)
+            fill("Black")
+            text("Timer",610,140)
+            
+            
+        }
+        
+        function details() { //makes the green rectangle in the middle
+            fill("green")
+            rect(100,0,500,700)
+           
+        }
+        function walls() {        //stops the ball from going to the left,right, and bottom screen
+            if (charMove < 115) {
+                charMove = 115
+            }
+            if (charMove > 585) {
+                charMove = 585
+            }
+            if (charUp > 680) {
+                charUp = 680
+            }
+        }
+        function charModel() {  //creates the ball model
+            fill("Blue")
+            ellipse(charMove,charUp,30,30)
+        }
+        
+        function moveMechanic() {         //makes the ball go left,right,up,and down depending on the arrow key
+            if (keyIsDown(LEFT_ARROW)) {
+                charMove--
+                charMove -= 3
+                
+            }
+            if (keyIsDown(RIGHT_ARROW)) {
+                charMove++
+                charMove += 3
+                
+            }
+            if (keyIsDown(UP_ARROW)) {
+                charUp--
+                charUp -= 3
+            }
+            if (keyIsDown(DOWN_ARROW)) {
+                charUp++
+                charUp += 3
+            }
+
+        }
+
+        
+    
+    </script>
+</head>
+
+<body>
+<form><input TYPE="button" onClick="history.go(0)" value="Reset"></form>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/USERNAME/p5js/blob/master/FILENAME.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+</html>
