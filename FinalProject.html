@@ -154,18 +154,21 @@
                 charMove -= 3
                 
             }
-            if (keyIsDown(RIGHT_ARROW)) {
+            else if (keyIsDown(RIGHT_ARROW)) {
                 charMove++
                 charMove += 3
                 
             }
-            if (keyIsDown(UP_ARROW)) {
+            else if (keyIsDown(UP_ARROW)) {
                 charUp--
                 charUp -= 3
             }
-            if (keyIsDown(DOWN_ARROW)) {
+            else if (keyIsDown(DOWN_ARROW)) {
                 charUp++
                 charUp += 3
+            }
+            else {
+                return false
             }
 
         }
