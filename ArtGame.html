@@ -5,20 +5,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
     <script>
     var a     // to move the brown line
-    var grass //for the background
         function setup() {                                                                                                                                                                                                                                                                       
             createCanvas(750,600); //canvas
             a = 150   //inital x value for brown line
 
             
         }
-        function preload() {
-            grass= loadImage ("grass1.jpg");  //code to show background
 
-        }
 
         function draw() {
-            image(grass, 0, 0, grass.width, grass.height);//insert background 
+            background("Gray")
             strokeWeight(10)
             fill("black")    //black line in the middle
             line(width/2,0,width/2,height)
